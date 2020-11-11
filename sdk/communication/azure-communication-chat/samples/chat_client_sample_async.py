@@ -64,7 +64,7 @@ class ChatClientSamplesAsync(object):
                 display_name='name',
                 share_history_time=datetime.utcnow()
             )]
-            chat_thread_client = await chat_client.create_chat_thread(topic, members)
+            chat_thread_client = await chat_client.create_chat_thread_client(topic, members)
             # [END create_thread]
 
             self._thread_id = chat_thread_client.thread_id

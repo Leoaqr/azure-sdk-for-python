@@ -72,7 +72,7 @@ class ChatThreadClientTest(CommunicationTestCase):
             display_name='name',
             share_history_time=share_history_time
         )]
-        self.chat_thread_client = self.chat_client.create_chat_thread(topic, members)
+        self.chat_thread_client = self.chat_client.create_chat_thread_client(topic, members)
         self.thread_id = self.chat_thread_client.thread_id
 
     @pytest.mark.live_test_only

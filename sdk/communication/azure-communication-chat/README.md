@@ -59,7 +59,7 @@ the chat thread topic, add members to chat thread, etc.
 You can get it by creating a new chat thread using ChatClient:
 
 ```python
-chat_thread_client = chat_client.create_chat_thread(topic, thread_members)
+chat_thread_client = chat_client.create_chat_thread_client(topic, thread_members)
 ```
 
 Alternatively, if you have created a chat thread before and you have its thread_id, you can create it by:
@@ -77,7 +77,7 @@ Once you initialized a `ChatClient` class, you can do the following chat operati
 ## Create, get, update, and delete threads
 
 ```Python
-create_chat_thread(topic, thread_members, **kwargs)
+create_chat_thread_client(topic, thread_members, **kwargs)
 get_chat_thread(thread_id, **kwargs)
 list_chat_threads(**kwargs)
 delete_chat_thread(thread_id, **kwargs)
@@ -137,7 +137,7 @@ The following sections provide several code snippets covering some of the most c
 
 ### Create a thread
 
-Use the `create_chat_thread` method to create a chat thread client object.
+Use the `create_chat_thread_client` method to create a chat thread client object.
 
 - Use `topic` to give a thread topic;
 - Use `thread_members` to list the `ChatThreadMember` to be added to the thread;
@@ -157,7 +157,7 @@ thread_members = [ChatThreadMember(
     share_history_time=datetime.utcnow()
 )]
 
-chat_thread_client = chat_client.create_chat_thread(topic, thread_members)
+chat_thread_client = chat_client.create_chat_thread_client(topic, thread_members)
 thread_id = chat_thread_client.thread_id
 ```
 

@@ -40,7 +40,7 @@ from .._version import SDK_MONIKER
 
 class ChatThreadClient(object):
     """A client to interact with the AzureCommunicationService Chat gateway.
-    Instances of this class is normally created by ChatClient.create_chat_thread()
+    Instances of this class is normally created by ChatClient.create_chat_thread_client()
 
     This client provides operations to add member to chat thread, remove member from
     chat thread, send message, delete message, update message, send typing notifications,

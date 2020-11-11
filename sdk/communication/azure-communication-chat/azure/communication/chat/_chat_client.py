@@ -115,7 +115,7 @@ class ChatClient(object):
         )
 
     @distributed_trace
-    def create_chat_thread(
+    def create_chat_thread_client(
         self, topic,  # type: str
         thread_members,  # type: list[ChatThreadMember]
         **kwargs  # type: Any

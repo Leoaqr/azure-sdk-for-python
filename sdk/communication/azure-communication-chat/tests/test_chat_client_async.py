@@ -28,7 +28,7 @@ credential = Mock()
 credential.get_token = Mock(return_value=AccessToken("some_token", datetime.now().replace(tzinfo=TZ_UTC)))
 
 @pytest.mark.asyncio
-async def test_create_chat_thread():
+async def test_create_chat_thread_client():
     thread_id = "19:bcaebfba0d314c2aa3e920d38fa3df08@thread.v2"
 
     async def mock_send(*_, **__):
@@ -43,11 +43,11 @@ async def test_create_chat_thread():
         display_name='name',
         share_history_time=datetime.utcnow()
     )]
-    chat_thread_client = await chat_client.create_chat_thread(topic, members)
+    chat_thread_client = await chat_client.create_chat_thread_client(topic, members)
     assert chat_thread_client.thread_id == thread_id
 
 @pytest.mark.asyncio
-async def test_create_chat_thread_raises_error():
+async def test_create_chat_thread_client_raises_error():
     async def mock_send(*_, **__):
         return mock_response(status_code=400, json_payload={"msg": "some error"})
     chat_client = ChatClient("https://endpoint", credential, transport=Mock(send=mock_send))
@@ -62,7 +62,7 @@ async def test_create_chat_thread_raises_error():
 
     raised = False
     try:
-        await chat_client.create_chat_thread(topic=topic, thread_members=members)
+        await chat_client.create_chat_thread_client(topic=topic, thread_members=members)
     except:
         raised = True
 

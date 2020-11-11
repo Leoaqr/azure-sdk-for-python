@@ -70,7 +70,7 @@ class ChatThreadClientTestAsync(AsyncCommunicationTestCase):
             display_name='name',
             share_history_time=share_history_time
         )]
-        self.chat_thread_client = await self.chat_client.create_chat_thread(topic, members)
+        self.chat_thread_client = await self.chat_client.create_chat_thread_client(topic, members)
         self.thread_id = self.chat_thread_client.thread_id
 
     async def _send_message(self):

@@ -31,7 +31,7 @@ class TestChatClient(unittest.TestCase):
         credential.get_token = Mock(return_value=AccessToken("some_token", datetime.now().replace(tzinfo=TZ_UTC)))
         TestChatClient.credential = credential
 
-    def test_create_chat_thread(self):
+    def test_create_chat_thread_client(self):
         thread_id = "19:bcaebfba0d314c2aa3e920d38fa3df08@thread.v2"
         chat_thread_client = None
         raised = False
@@ -49,7 +49,7 @@ class TestChatClient(unittest.TestCase):
             share_history_time=datetime.utcnow()
         )]
         try:
-            chat_thread_client = chat_client.create_chat_thread(topic, members)
+            chat_thread_client = chat_client.create_chat_thread_client(topic, members)
         except:
             raised = True
             raise
@@ -57,7 +57,7 @@ class TestChatClient(unittest.TestCase):
         self.assertFalse(raised, 'Expected is no excpetion raised')
         assert chat_thread_client.thread_id == thread_id
 
-    def test_create_chat_thread_raises_error(self):
+    def test_create_chat_thread_client_raises_error(self):
         def mock_send(*_, **__):
             return mock_response(status_code=400, json_payload={"msg": "some error"})
         chat_client = ChatClient("https://endpoint", TestChatClient.credential, transport=Mock(send=mock_send))
@@ -70,7 +70,7 @@ class TestChatClient(unittest.TestCase):
             share_history_time=datetime.utcnow()
         )]
 
-        self.assertRaises(HttpResponseError, chat_client.create_chat_thread, topic=topic, thread_members=thread_members)
+        self.assertRaises(HttpResponseError, chat_client.create_chat_thread_client, topic=topic, thread_members=thread_members)
 
     def test_delete_chat_thread(self):
         thread_id = "19:bcaebfba0d314c2aa3e920d38fa3df08@thread.v2"
