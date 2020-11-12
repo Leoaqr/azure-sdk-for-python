@@ -72,7 +72,7 @@ class ChatClientTest(CommunicationTestCase):
         self.thread_id = chat_thread_client.thread_id
 
     @pytest.mark.live_test_only
-    def test_create_chat_thread(self):
+    def test_create_chat_thread_client(self):
         self._create_thread()
         assert self.thread_id is not None
 
