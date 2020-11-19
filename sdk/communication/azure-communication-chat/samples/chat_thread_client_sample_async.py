@@ -29,7 +29,7 @@ import asyncio
 
 class ChatThreadClientSamplesAsync(object):
     from azure.communication.administration import CommunicationIdentityClient
-    connection_string = "endpoint=https://chat-sdk-e2e.dev.communication.azure.net/;accesskey=jewT6RxcZImaVOb/SFeDOLkjEx46Z4ECGI+JtYBhmlurEBYqxAzmHpr+vCR8Y7AZMH8GD9aOh3/j5uel8T4ZdA==" ## os.environ.get("AZURE_COMMUNICATION_SERVICE_CONNECTION_STRING", None)
+    connection_string = os.environ.get("AZURE_COMMUNICATION_SERVICE_CONNECTION_STRING", None)
     if not connection_string:
         raise ValueError("Set AZURE_COMMUNICATION_SERVICE_CONNECTION_STRING env before run this sample.")
 
@@ -38,7 +38,7 @@ class ChatThreadClientSamplesAsync(object):
     tokenresponse = identity_client.issue_token(user, scopes=["chat"])
     token = tokenresponse.token
 
-    endpoint = "https://chat-sdk-e2e.dev.communication.azure.net" ## os.environ.get("AZURE_COMMUNICATION_SERVICE_ENDPOINT", None)
+    endpoint = os.environ.get("AZURE_COMMUNICATION_SERVICE_ENDPOINT", None)
     if not endpoint:
         raise ValueError("Set AZURE_COMMUNICATION_SERVICE_ENDPOINT env before run this sample.")
 
