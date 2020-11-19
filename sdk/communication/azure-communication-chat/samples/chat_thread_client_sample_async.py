@@ -29,7 +29,7 @@ import asyncio
 
 class ChatThreadClientSamplesAsync(object):
     from azure.communication.administration import CommunicationIdentityClient
-    connection_string = os.environ.get("AZURE_COMMUNICATION_SERVICE_CONNECTION_STRING", None)
+    connection_string = "endpoint=https://chat-sdk-e2e.dev.communication.azure.net/;accesskey=jewT6RxcZImaVOb/SFeDOLkjEx46Z4ECGI+JtYBhmlurEBYqxAzmHpr+vCR8Y7AZMH8GD9aOh3/j5uel8T4ZdA==" ## os.environ.get("AZURE_COMMUNICATION_SERVICE_CONNECTION_STRING", None)
     if not connection_string:
         raise ValueError("Set AZURE_COMMUNICATION_SERVICE_CONNECTION_STRING env before run this sample.")
 
@@ -38,7 +38,7 @@ class ChatThreadClientSamplesAsync(object):
     tokenresponse = identity_client.issue_token(user, scopes=["chat"])
     token = tokenresponse.token
 
-    endpoint = os.environ.get("AZURE_COMMUNICATION_SERVICE_ENDPOINT", None)
+    endpoint = "https://chat-sdk-e2e.dev.communication.azure.net" ## os.environ.get("AZURE_COMMUNICATION_SERVICE_ENDPOINT", None)
     if not endpoint:
         raise ValueError("Set AZURE_COMMUNICATION_SERVICE_ENDPOINT env before run this sample.")
 
@@ -181,6 +181,22 @@ class ChatThreadClientSamplesAsync(object):
                 print(chat_thread_participant)
             # [END list_participants]
 
+    async def add_participant_async(self):
+        from azure.communication.chat.aio import ChatThreadClient, CommunicationUserCredential
+        chat_thread_client = ChatThreadClient(self.endpoint, CommunicationUserCredential(self.token), self._thread_id)
+
+        async with chat_thread_client:
+            # [START add_participant]
+            from azure.communication.chat import ChatThreadParticipant, CommunicationUser
+            from datetime import datetime
+            new_chat_thread_participant = ChatThreadParticipant(
+                    user=self.new_user,
+                    display_name='name',
+                    share_history_time=datetime.utcnow())
+            await chat_thread_client.add_participant(new_chat_thread_participant)
+            # [END add_participant]
+            print("add_participant succeeded")
+
     async def add_participants_async(self):
         from azure.communication.chat.aio import ChatThreadClient, CommunicationUserCredential
         chat_thread_client = ChatThreadClient(self.endpoint, CommunicationUserCredential(self.token), self._thread_id)
@@ -235,6 +251,7 @@ async def main():
     await sample.send_read_receipt_async()
     await sample.list_read_receipts_async()
     await sample.delete_message_async()
+    await sample.add_participant_async()
     await sample.add_participants_async()
     await sample.list_participants_async()
     await sample.remove_participant_async()

@@ -18,7 +18,10 @@ from ._common import CommunicationUserCredentialPolicy
 from ._shared.user_credential import CommunicationUserCredential
 from ._generated import AzureCommunicationChatService
 from ._generated.models import CreateChatThreadRequest
-from ._models import ChatThread
+from ._models import (
+    ChatThread,
+    ChatThreadParticipant
+)
 from ._utils import _to_utc_datetime # pylint: disable=unused-import
 from ._version import SDK_MONIKER
 
